@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sign in to your BeOneOfUs Mail account.">
+    <link rel="icon" type="image/png" href="./Logo/logo.png">
+    <title>Sign in - BeOneOfUs Mail</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <a class="auth-brand" href="/">
+        <img src="./Logo/Glossy B1 Mail Orbit Logo.png" alt="">
+        <span>BeOneOfUs <strong>Mail</strong></span>
+      </a>
+      <section class="auth-card" aria-labelledby="auth-title">
+        <div class="auth-heading">
+          <span class="auth-mark" aria-hidden="true"><img src="./Logo/logo.png" alt=""></span>
+          <p class="auth-eyebrow">GOOD TO HAVE YOU BACK</p>
+          <h1 id="auth-title">Welcome back</h1>
+          <p>Sign in to catch up with your community.</p>
+        </div>
+        <form class="auth-form" data-login-form>
+          <div class="auth-field">
+            <label for="login-email">Email address</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@beoneofus.com" pattern="^[^@\s]+@beoneofus\.com$" title="Use your @beoneofus.com company address." required>
+          </div>
+          <div class="auth-field">
+            <div class="auth-label-row">
+              <label for="login-password">Password</label>
+              <a href="/forget-password">Forgot password?</a>
+            </div>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" maxlength="128" placeholder="Enter your password" required>
+          </div>
+          <p class="profile-status" data-login-status role="status" aria-live="polite"></p>
+          <button class="auth-submit" type="submit">Sign in <span aria-hidden="true">&rarr;</span></button>
+        </form>
+        <p class="auth-switch">New to BeOneOfUs Mail? <a href="/register">Create an account</a></p>
+      </section>
+      <p class="auth-footer"><a href="/">Back to BeOneOfUs Mail</a></p>
+    </main>
+    <script type="module" src="./js/login.js"></script>
+  </body>
+</html>

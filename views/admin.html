@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Manage internal BeOneOfUs Mail access and traffic.">
+    <link rel="icon" type="image/png" href="/Logo/logo.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Admin dashboard - BeOneOfUs Mail</title>
+  </head>
+  <body class="admin-page">
+    <header class="admin-topbar">
+      <a class="profile-brand" href="/admin" aria-label="BeOneOfUs Mail admin dashboard">
+        <img src="/Logo/logo.png" alt="" width="34" height="34">
+        <span>BeOneOfUs <strong>Mail</strong><small>ADMIN CONSOLE</small></span>
+      </a>
+      <div class="admin-topbar-actions">
+        <span class="admin-live-indicator"><i></i> Internal system</span>
+        <a class="profile-inbox-link" href="/inbox"><span aria-hidden="true">←</span> Mailbox</a>
+        <button class="admin-signout" type="button" data-signout>Sign out</button>
+      </div>
+    </header>
+    <main class="admin-workspace">
+      <section class="admin-hero">
+        <div class="admin-hero-copy">
+          <p class="profile-eyebrow">INTERNAL MAIL OPERATIONS</p>
+          <h1>Admin dashboard</h1>
+          <p>Verify employees, manage access, and keep an eye on internal mail activity.</p>
+        </div>
+        <div class="admin-hero-actions">
+          <span class="admin-last-updated" data-last-updated>Updating overview…</span>
+          <button class="admin-refresh" type="button" data-refresh><span aria-hidden="true">↻</span> Refresh</button>
+        </div>
+      </section>
+
+      <p class="admin-status" data-status role="status" aria-live="polite"></p>
+      <section class="admin-stat-grid" aria-label="Mail system overview">
+        <article class="admin-stat-card"><span class="admin-stat-icon violet" aria-hidden="true">◎</span><span>Company accounts</span><strong data-stat="users">—</strong><small>Registered employees</small></article>
+        <article class="admin-stat-card"><span class="admin-stat-icon amber" aria-hidden="true">◷</span><span>Awaiting approval</span><strong data-stat="pending">—</strong><small>Require manual review</small></article>
+        <article class="admin-stat-card"><span class="admin-stat-icon green" aria-hidden="true">✓</span><span>Approved users</span><strong data-stat="approved">—</strong><small>Active company accounts</small></article>
+        <article class="admin-stat-card"><span class="admin-stat-icon red" aria-hidden="true">⊘</span><span>Suspended users</span><strong data-stat="suspended">—</strong><small>Access currently blocked</small></article>
+      </section>
+
+      <section class="admin-panel admin-mail-panel" aria-labelledby="admin-mail-title">
+        <div class="admin-panel-heading">
+          <div>
+            <p class="profile-eyebrow">ADMIN MAIL MANAGEMENT</p>
+            <h2 id="admin-mail-title">Send and receive mail</h2>
+            <p class="admin-panel-subtitle">Browse employee Inbox, Sent, and other mail folders; preview and download attachments; send internal mail with any file type.</p>
+            <p class="admin-mail-access-note">Admin mail access includes private employee messages. Message edits and deletions are recorded in the audit log.</p>
+          </div>
+          <button class="admin-refresh" type="button" data-mail-refresh><span aria-hidden="true">↻</span> Refresh mailbox</button>
+        </div>
+        <div class="admin-mail-layout">
+          <form class="admin-mail-compose" data-admin-mail-form>
+            <h3 data-mail-form-title>New message</h3>
+            <label data-mail-recipient-wrap>To
+              <select name="recipientEmail" data-mail-recipient required>
+                <option value="">Loading approved accounts…</option>
+              </select>
+            </label>
+            <label>Subject
+              <input name="subject" type="text" maxlength="200" required>
+            </label>
+            <label>Message
+              <textarea name="body" rows="6" maxlength="20000" required></textarea>
+            </label>
+            <label>Attachments <span class="admin-settings-optional">Any file type; up to 5 MB each, 15 MB per message</span>
+              <input name="attachments" type="file" multiple data-mail-files>
+            </label>
+            <div class="admin-mail-compose-attachments" data-mail-compose-attachments></div>
+            <p class="admin-mail-status" data-mail-status role="status" aria-live="polite"></p>
+            <button class="admin-confirm-button approve" type="submit" data-mail-send>Send internal message</button>
+            <button class="admin-cancel-button" type="button" data-mail-cancel-edit hidden>Cancel editing</button>
+          </form>
+          <section class="admin-mailbox-view" aria-label="Admin inbox and sent messages">
+            <div class="admin-mail-toolbar">
+              <label class="admin-mail-owner-label">Mailbox
+                <select data-mailbox-owner aria-label="Choose a mailbox to manage">
+                  <option value="">Your admin mailbox</option>
+                </select>
+              </label>
+              <div role="tablist" aria-label="Mailbox folder">
+                <button class="admin-mail-folder" type="button" role="tab" aria-selected="false" data-mail-folder="all">All mail</button>
+                <button class="admin-mail-folder is-active" type="button" role="tab" aria-selected="true" data-mail-folder="inbox">Inbox</button>
+                <button class="admin-mail-folder" type="button" role="tab" aria-selected="false" data-mail-folder="sent">Sent</button>
+              </div>
+              <span data-mail-count>Loading…</span>
+            </div>
+            <div class="admin-mail-content">
+              <div class="admin-mail-list" data-admin-mail-list aria-label="Messages"></div>
+              <article class="admin-mail-detail" data-admin-mail-detail aria-live="polite">
+                <p>Select a message to read it.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="admin-panel admin-settings-panel" aria-labelledby="admin-settings-title">
+        <div class="admin-panel-heading">
+          <div>
+            <p class="profile-eyebrow">SYSTEM CONFIGURATION</p>
+            <h2 id="admin-settings-title">Email delivery (SMTP)</h2>
+            <p class="admin-panel-subtitle">Configure password-recovery email delivery. Credentials are encrypted at rest and never shown after saving.</p>
+          </div>
+          <span class="admin-settings-state" data-smtp-state>Loading settings…</span>
+        </div>
+        <form class="admin-settings-form" data-smtp-form>
+          <div class="admin-settings-grid">
+            <label>SMTP host
+              <input name="host" type="text" maxlength="255" placeholder="smtp.example.com" autocomplete="url" required>
+            </label>
+            <label>Port
+              <input name="port" type="number" min="1" max="65535" value="587" required>
+            </label>
+            <label>Sender email
+              <input name="from" type="text" inputmode="email" maxlength="254" placeholder="BeOneOfUs Mail <mail@beoneofus.com>" autocomplete="email" required>
+            </label>
+            <label>SMTP username <span class="admin-settings-optional">Optional</span>
+              <input name="username" type="text" maxlength="254" autocomplete="username" placeholder="Leave blank if relay requires no authentication">
+            </label>
+            <label>SMTP password <span class="admin-settings-optional">Optional</span>
+              <input name="password" type="password" maxlength="1024" autocomplete="new-password" placeholder="Leave blank to keep the current password">
+            </label>
+            <label>Confirm with your admin password
+              <input name="passwordConfirmation" type="password" maxlength="128" autocomplete="current-password" required>
+            </label>
+          </div>
+          <label class="admin-settings-tls">
+            <input name="secure" type="checkbox">
+            <span>Use implicit TLS (usually port 465). Leave unchecked for STARTTLS (usually port 587).</span>
+          </label>
+          <p class="admin-settings-help">For authenticated SMTP, enter both username and password. Leave the password blank to keep the saved credential; clear the username to disable SMTP authentication. Environment variables remain the fallback until settings are saved here.</p>
+          <p class="admin-settings-status" data-smtp-status role="status" aria-live="polite"></p>
+          <div class="admin-settings-actions">
+            <button class="admin-cancel-button" type="button" data-smtp-test>Send test email</button>
+            <button class="admin-confirm-button approve" type="submit" data-smtp-save>Save SMTP settings</button>
+          </div>
+        </form>
+        <div class="admin-settings-links" aria-label="SMTP setup guides">
+          <strong>Provider setup guides</strong>
+          <a href="https://support.google.com/a/answer/176600" target="_blank" rel="noopener noreferrer">Google Workspace SMTP relay</a>
+          <a href="https://learn.microsoft.com/en-us/exchange/mail-flow-best-practices/how-to-set-up-a-multifunction-device-or-application-to-send-email-using-microsoft-365-or-office-365" target="_blank" rel="noopener noreferrer">Microsoft 365 SMTP</a>
+          <a href="https://docs.aws.amazon.com/ses/latest/dg/smtp-credentials.html" target="_blank" rel="noopener noreferrer">Amazon SES SMTP credentials</a>
+          <a href="https://nodemailer.com/smtp/" target="_blank" rel="noopener noreferrer">SMTP options reference</a>
+        </div>
+      </section>
+
+      <section class="admin-panel admin-settings-panel" aria-labelledby="admin-database-title">
+        <div class="admin-panel-heading">
+          <div>
+            <p class="profile-eyebrow">DATABASE UPGRADE PREPARATION</p>
+            <h2 id="admin-database-title">Supabase connection</h2>
+            <p class="admin-panel-subtitle">Save and test a future Supabase connection. Saving these settings does not change the active database or migrate data.</p>
+          </div>
+          <span class="admin-settings-state" data-database-state>Loading settings…</span>
+        </div>
+        <p class="admin-database-active"><strong>Active database:</strong> <span data-active-database>JSON</span> <span>— remains active until a separate backend upgrade and migration are implemented.</span></p>
+        <form class="admin-settings-form" data-database-form>
+          <div class="admin-settings-grid admin-database-grid">
+            <label>Supabase project URL
+              <input name="projectUrl" type="url" maxlength="255" placeholder="https://project-ref.supabase.co" autocomplete="url" required>
+            </label>
+            <label>Supabase API key
+              <input name="apiKey" type="password" maxlength="4096" autocomplete="new-password" placeholder="Enter project API key; leave blank to keep saved key">
+            </label>
+            <label>Confirm with your admin password
+              <input name="passwordConfirmation" type="password" maxlength="128" autocomplete="current-password" required>
+            </label>
+          </div>
+          <p class="admin-settings-help">The project API key is encrypted at rest and never shown after saving. Use a project key intended for server-side access; never paste a database password into this API-key field. This connection is only a saved/tested upgrade setting; the app continues using JSON.</p>
+          <p class="admin-settings-status" data-database-status role="status" aria-live="polite"></p>
+          <div class="admin-settings-actions">
+            <button class="admin-cancel-button" type="button" data-database-test>Test Supabase connection</button>
+            <button class="admin-confirm-button approve" type="submit" data-database-save>Save future connection</button>
+          </div>
+        </form>
+        <div class="admin-settings-links" aria-label="Supabase setup guides">
+          <strong>Supabase setup guides</strong>
+          <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase dashboard</a>
+          <a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener noreferrer">API keys and key safety</a>
+          <a href="https://supabase.com/docs/guides/platform/migrating-and-upgrading-projects" target="_blank" rel="noopener noreferrer">Migration and upgrade guide</a>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="admin-notifications-title">
+        <div class="admin-panel-heading">
+          <div><p class="profile-eyebrow">REVIEW QUEUE</p><h2 id="admin-notifications-title">New access requests</h2><p class="admin-panel-subtitle">Confirm each person’s employment before approving.</p></div>
+          <span class="admin-pending-count" data-pending-count>0 pending</span>
+        </div>
+        <div class="admin-notification-list" data-notifications></div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="admin-users-title">
+        <div class="admin-panel-heading">
+          <div><p class="profile-eyebrow">ACCESS CONTROL</p><h2 id="admin-users-title">Employee directory</h2><p class="admin-panel-subtitle">Account actions require your password confirmation.</p></div>
+          <div class="admin-table-controls">
+            <label class="admin-search"><span aria-hidden="true">⌕</span><input type="search" data-user-search placeholder="Search name or email" aria-label="Search employee accounts"></label>
+            <label class="admin-filter"><span class="visually-hidden">Filter accounts</span>
+              <select data-status-filter aria-label="Filter accounts by status">
+              <option value="all">All accounts</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="suspended">Suspended</option>
+              <option value="admin">Admins</option>
+            </select>
+            </label>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-users-table">
+            <thead><tr><th>Employee</th><th>Requested</th><th>Access</th><th>Mailbox activity</th><th>Manage</th></tr></thead>
+            <tbody data-users></tbody>
+          </table>
+        </div>
+        <div class="admin-empty" data-users-empty hidden><strong>No matching accounts</strong><span>Try another search or status filter.</span></div>
+        <div class="admin-table-footer"><span data-result-count>Showing 0 accounts</span><span>Account email is managed by the server operator.</span></div>
+      </section>
+
+      <section class="admin-lower-grid">
+      <section class="admin-panel admin-traffic-panel" aria-labelledby="admin-traffic-title">
+        <div class="admin-panel-heading">
+          <div><p class="profile-eyebrow">LOCAL MAIL TRAFFIC</p><h2 id="admin-traffic-title">System activity</h2></div>
+          <span class="admin-local-badge"><i></i> INTERNAL</span>
+        </div>
+        <div class="admin-traffic-grid">
+          <div><span>Messages</span><strong data-stat="messages">—</strong></div>
+          <div><span>Saved to Sent</span><strong data-stat="sent">—</strong></div>
+          <div><span>Drafts</span><strong data-stat="drafts">—</strong></div>
+        </div>
+        <p class="admin-disclaimer">Aggregate totals only. Message content is not shown here; mail is stored locally and is not externally delivered.</p>
+      </section>
+      <section class="admin-panel admin-audit-panel" aria-labelledby="admin-audit-title">
+        <div class="admin-panel-heading"><div><p class="profile-eyebrow">ACCOUNTABILITY</p><h2 id="admin-audit-title">Recent admin actions</h2></div><span class="admin-audit-lock" aria-label="Audit log is read-only">▣ Read-only</span></div>
+        <ol class="admin-audit-list" data-audit-log></ol>
+      </section>
+      </section>
+    </main>
+    <dialog class="admin-confirm-dialog" data-mail-delete-dialog aria-labelledby="admin-mail-delete-title" aria-describedby="admin-mail-delete-copy">
+      <form class="admin-confirm-form" data-mail-delete-form>
+        <p class="profile-eyebrow">PERMANENT MESSAGE DELETE</p>
+        <h2 id="admin-mail-delete-title">Delete this message?</h2>
+        <p class="admin-confirm-copy" id="admin-mail-delete-copy" data-mail-delete-copy></p>
+        <p class="admin-confirm-error" data-mail-delete-error role="alert"></p>
+        <div class="admin-confirm-actions">
+          <button class="admin-cancel-button" type="button" data-mail-delete-cancel>Cancel</button>
+          <button class="admin-confirm-button" type="submit" data-mail-delete-confirm>Delete permanently</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="admin-confirm-dialog" data-confirm-dialog aria-labelledby="admin-confirm-title">
+      <form class="admin-confirm-form" data-confirm-form>
+        <p class="profile-eyebrow">SENSITIVE ACCESS CHANGE</p>
+        <h2 id="admin-confirm-title" data-confirm-title>Confirm account change</h2>
+        <p class="admin-confirm-copy" data-confirm-copy></p>
+        <label class="admin-confirm-field" data-reason-wrap hidden>
+          <span>Reason for this action <b>Required</b></span>
+          <textarea name="reason" data-confirm-reason maxlength="500" rows="3" placeholder="Record why access is being changed"></textarea>
+        </label>
+        <label class="admin-confirm-field">
+          <span>Confirm with your admin password <b>Required</b></span>
+          <input name="password" type="password" autocomplete="current-password" maxlength="128" required>
+        </label>
+        <p class="admin-confirm-error" data-confirm-error role="alert"></p>
+        <div class="admin-confirm-actions">
+          <button class="admin-cancel-button" type="button" data-cancel-confirm>Cancel</button>
+          <button class="admin-confirm-button" type="submit" data-confirm-submit>Confirm change</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="admin-employee-dialog" data-employee-dialog aria-labelledby="admin-employee-name">
+      <section class="admin-employee-profile">
+        <header class="admin-employee-heading">
+          <div class="admin-employee-avatar" data-employee-avatar aria-hidden="true">
+            <span data-employee-initial>?</span>
+            <img data-employee-photo alt="" hidden>
+            <span class="avatar-sticker" data-employee-sticker hidden></span>
+          </div>
+          <div>
+            <p class="profile-eyebrow">EMPLOYEE PROFILE</p>
+            <h2 id="admin-employee-name" data-employee-name>Employee</h2>
+            <p data-employee-email></p>
+          </div>
+          <button class="profile-dialog-close" type="button" aria-label="Close employee profile" data-close-employee>×</button>
+        </header>
+        <p class="admin-employee-status" data-employee-status></p>
+        <dl class="admin-employee-details">
+          <div><dt>Position</dt><dd data-employee-position></dd></div>
+          <div><dt>Phone</dt><dd data-employee-phone></dd></div>
+          <div><dt>Location</dt><dd data-employee-location></dd></div>
+          <div><dt>About</dt><dd data-employee-bio></dd></div>
+        </dl>
+        <form class="admin-employee-edit-form" data-employee-form hidden>
+          <label class="admin-employee-edit-field">Display name
+            <input name="name" type="text" maxlength="80" autocomplete="name" required>
+          </label>
+          <label class="admin-employee-edit-field">Position or job title
+            <input name="position" type="text" maxlength="100">
+          </label>
+          <input type="hidden" name="avatarSticker">
+          <fieldset class="profile-sticker-field admin-employee-sticker-field">
+            <legend>Avatar sticker</legend>
+            <div class="profile-sticker-picker" data-admin-sticker-picker></div>
+          </fieldset>
+          <div class="admin-employee-edit-grid">
+            <label class="admin-employee-edit-field">Phone
+              <input name="phone" type="tel" maxlength="32" autocomplete="tel">
+            </label>
+            <label class="admin-employee-edit-field">Location
+              <input name="location" type="text" maxlength="100" autocomplete="address-level2">
+            </label>
+          </div>
+          <label class="admin-employee-edit-field">About
+            <textarea name="bio" maxlength="240" rows="3"></textarea>
+          </label>
+          <label class="admin-employee-edit-field">Confirm with your admin password
+            <input name="password" type="password" autocomplete="current-password" maxlength="128" required>
+          </label>
+          <p class="admin-employee-error" data-employee-form-error role="alert"></p>
+          <div class="admin-employee-edit-actions">
+            <button class="admin-cancel-button" type="button" data-cancel-employee-edit>Cancel</button>
+            <button class="admin-confirm-button approve" type="submit" data-save-employee>Save profile</button>
+          </div>
+        </form>
+        <p class="admin-employee-error" data-employee-error role="alert"></p>
+        <div class="admin-employee-view-actions" data-employee-view-actions hidden>
+          <span class="admin-employee-save-status" data-employee-save-status role="status"></span>
+          <button class="admin-confirm-button approve" type="button" data-edit-employee>Edit details</button>
+        </div>
+      </section>
+    </dialog>
+    <script type="module" src="/js/admin-dashboard.js"></script>
+  </body>
+</html>

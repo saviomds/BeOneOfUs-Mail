@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Manage your BeOneOfUs Mail profile.">
+    <link rel="icon" type="image/png" href="./Logo/logo.png">
+    <title>Your profile - BeOneOfUs Mail</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body class="profile-page">
+    <header class="profile-topbar">
+      <a class="profile-brand" href="/inbox">
+        <img src="./Logo/Glossy B1 Mail Orbit Logo.png" alt="BeOneOfUs Mail logo" width="32" height="32">
+        <span>BeOneOfUs <strong>Mail</strong></span>
+      </a>
+      <a class="profile-inbox-link" href="/inbox"><span aria-hidden="true">←</span> Back to inbox</a>
+      <a class="profile-inbox-link" href="/admin" data-admin-link hidden>Admin dashboard</a>
+    </header>
+
+    <main class="profile-workspace">
+      <div class="profile-page-heading">
+        <div>
+          <p class="profile-eyebrow">YOUR ACCOUNT</p>
+          <h1>Profile</h1>
+          <p>Make your corner of the community feel like you.</p>
+        </div>
+        <span class="profile-heading-mark" aria-hidden="true"><img src="./Logo/logo.png" alt="BeOneOfUs Mail logo" width="32" height="32"></span>
+      </div>
+
+      <section class="profile-cover" aria-labelledby="profile-display-name">
+        <div class="profile-cover-art" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="profile-identity">
+          <span class="profile-avatar-large" data-profile-avatar aria-hidden="true">
+            <span data-profile-initial>M</span>
+            <img data-profile-photo alt="" hidden>
+            <span class="avatar-sticker" data-profile-sticker hidden></span>
+          </span>
+          <div class="profile-identity-copy">
+            <p class="profile-eyebrow">YOUR COMMUNITY PROFILE</p>
+            <h2 class="profile-display-name" data-profile-name>Maya</h2>
+            <p class="profile-display-email" data-profile-email>maya@beoneofus.com</p>
+          </div>
+          <button class="profile-edit-button" type="button" data-edit-profile>
+            <span aria-hidden="true">✎</span> Edit profile
+          </button>
+        </div>
+        <p class="profile-cover-bio" data-profile-bio>Add a short introduction to say hello to your community.</p>
+      </section>
+
+      <div class="profile-content-grid">
+        <section class="profile-panel profile-details-panel" aria-labelledby="profile-details-title">
+          <div class="profile-panel-heading">
+            <div>
+              <p class="profile-eyebrow">THE BASICS</p>
+              <h2 id="profile-details-title">Your details</h2>
+            </div>
+            <span class="profile-panel-icon" aria-hidden="true">◎</span>
+          </div>
+          <dl class="profile-detail-list">
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">✳</span> Display name</dt>
+              <dd data-profile-detail-name>Maya</dd>
+            </div>
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">＠</span> Email address</dt>
+              <dd data-profile-detail-email>maya@beoneofus.com</dd>
+            </div>
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">▤</span> Position</dt>
+              <dd data-profile-detail-position>Not added yet</dd>
+            </div>
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">☎</span> Phone</dt>
+              <dd data-profile-detail-phone>Not added yet</dd>
+            </div>
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">⌖</span> Location</dt>
+              <dd data-profile-detail-location>Not added yet</dd>
+            </div>
+            <div class="profile-detail-row">
+              <dt><span aria-hidden="true">♡</span> About you</dt>
+              <dd data-profile-detail-bio class="profile-bio-detail">Not added yet</dd>
+            </div>
+          </dl>
+          <button class="profile-text-button" type="button" data-edit-profile>Update your details <span aria-hidden="true">→</span></button>
+        </section>
+
+        <aside class="profile-panel profile-account-panel" aria-labelledby="profile-account-title">
+          <p class="profile-eyebrow">A LITTLE MORE ABOUT YOUR SPACE</p>
+          <h2 id="profile-account-title">Your community, connected.</h2>
+          <p>Your profile helps people recognize you when they hear from you in BeOneOfUs Mail.</p>
+          <div class="profile-local-note">
+            <span class="profile-local-icon" aria-hidden="true">⌂</span>
+            <span><strong>Stored with your account</strong><small>Your profile is saved in the app’s JSON database.</small></span>
+          </div>
+          <a class="profile-back-link" href="/inbox">Go to your inbox <span aria-hidden="true">→</span></a>
+        </aside>
+      </div>
+      <p class="profile-save-status" data-profile-status role="status" aria-live="polite"></p>
+    </main>
+
+    <dialog class="profile-edit-dialog" data-profile-dialog aria-labelledby="profile-dialog-title">
+      <form class="profile-edit-form" data-profile-form>
+        <div class="profile-dialog-heading">
+          <div>
+            <p class="profile-eyebrow">MAKE IT YOURS</p>
+            <h2 id="profile-dialog-title">Edit your profile</h2>
+            <p>Keep your details up to date for your community.</p>
+          </div>
+          <button class="profile-dialog-close" type="button" aria-label="Close" data-close-profile>×</button>
+        </div>
+        <label class="profile-edit-field" for="profile-name">
+          <span>Your name</span>
+          <input id="profile-name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="How should we call you?" required>
+        </label>
+        <label class="profile-edit-field" for="profile-email">
+          <span>Email address</span>
+          <input id="profile-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@beoneofus.com" pattern="^[^@\s]+@beoneofus\.com$" title="Company email addresses cannot be changed from your profile." readonly required>
+          <small>Company email addresses are locked to your approved account.</small>
+        </label>
+        <div class="profile-photo-field">
+          <div class="profile-photo-preview" aria-hidden="true">
+            <span data-edit-photo-initial>M</span>
+            <img data-edit-photo alt="" hidden>
+            <span class="avatar-sticker" data-edit-photo-sticker hidden></span>
+          </div>
+          <div class="profile-photo-actions">
+            <strong>Profile photo</strong>
+            <small>JPEG, PNG, or WebP. Cropped and stored as a private profile image (max 256 KB).</small>
+            <div>
+              <label class="profile-photo-select">Choose photo
+                <input type="file" data-photo-input accept="image/jpeg,image/png,image/webp">
+              </label>
+              <button class="profile-photo-remove" type="button" data-remove-photo>Remove photo</button>
+            </div>
+          </div>
+          <fieldset class="profile-sticker-field">
+            <legend>Choose an avatar sticker <small>Optional</small></legend>
+            <p>Pick a little extra personality for your profile. Stickers appear with your photo or as your avatar.</p>
+            <div class="profile-sticker-picker" data-profile-sticker-picker></div>
+          </fieldset>
+        </div>
+        <label class="profile-edit-field" for="profile-position">
+          <span>Position or job title <small>Optional</small></span>
+          <input id="profile-position" name="position" type="text" maxlength="100" placeholder="For example, Operations Coordinator">
+        </label>
+        <div class="profile-edit-grid">
+          <label class="profile-edit-field" for="profile-phone">
+            <span>Phone number <small>Optional</small></span>
+            <input id="profile-phone" name="phone" type="tel" autocomplete="tel" maxlength="32" placeholder="+1 (555) 010-1234">
+          </label>
+          <label class="profile-edit-field" for="profile-location">
+            <span>Location <small>Optional</small></span>
+            <input id="profile-location" name="location" type="text" autocomplete="address-level2" maxlength="100" placeholder="City, country">
+          </label>
+        </div>
+        <label class="profile-edit-field" for="profile-bio">
+          <span>About you <small>Optional</small></span>
+          <textarea id="profile-bio" name="bio" maxlength="240" rows="3" placeholder="A little about you..."></textarea>
+        </label>
+        <div class="profile-dialog-actions">
+          <button class="profile-cancel-button" type="button" data-close-profile>Cancel</button>
+          <button class="profile-save-button" type="submit">Save changes <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="./js/profile.js"></script>
+  </body>
+</html>

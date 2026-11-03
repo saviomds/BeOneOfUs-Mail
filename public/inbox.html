@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Your BeOneOfUs Mail inbox.">
+    <link rel="icon" type="image/png" href="./Logo/logo.png">
+    <title>Inbox - BeOneOfUs Mail</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body class="inbox-page">
+    <header class="inbox-header">
+      <a class="inbox-brand" href="/">
+        <img src="./Logo/Glossy B1 Mail Orbit Logo.png" alt="">
+        <span>BeOneOfUs <strong>Mail</strong></span>
+      </a>
+      <label class="inbox-search">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="mail-search" type="search" placeholder="Search mail" aria-label="Search mail">
+        <kbd>/</kbd>
+      </label>
+      <div class="inbox-user">
+        <button class="icon-button help-button" type="button" aria-label="Mailbox help" data-action="help">?</button>
+        <a class="inbox-admin-link" href="/admin" data-admin-link hidden>Admin dashboard</a>
+        <a class="inbox-profile-link" href="/profile" data-profile-link aria-label="Open profile for Maya">
+          <span class="user-identity"><span class="user-name" data-profile-name>Maya</span><small data-profile-position hidden></small></span>
+          <span class="user-avatar" data-profile-avatar aria-hidden="true"><span data-profile-initial>M</span><img data-profile-photo alt="" hidden><span class="avatar-sticker" data-profile-sticker hidden></span></span>
+        </a>
+      </div>
+    </header>
+
+    <div class="inbox-layout">
+      <aside class="inbox-sidebar" aria-label="Mailbox folders">
+        <button class="compose-button" type="button" data-action="compose"><span aria-hidden="true">+</span> Compose</button>
+        <nav class="folder-nav">
+          <a class="folder-link selected" href="#inbox" data-folder="inbox"><span class="folder-icon" aria-hidden="true">▰</span> Inbox <span class="folder-count" data-count="inbox">0</span></a>
+          <a class="folder-link" href="#starred" data-folder="starred"><span class="folder-icon" aria-hidden="true">☆</span> Starred</a>
+          <a class="folder-link" href="#snoozed" data-folder="snoozed"><span class="folder-icon" aria-hidden="true">◷</span> Snoozed</a>
+          <a class="folder-link" href="#sent" data-folder="sent"><span class="folder-icon" aria-hidden="true">↗</span> Sent</a>
+          <a class="folder-link" href="#drafts" data-folder="drafts"><span class="folder-icon" aria-hidden="true">▧</span> Drafts <span class="folder-count muted" data-count="drafts">0</span></a>
+          <a class="folder-link" href="#archive" data-folder="archive"><span class="folder-icon" aria-hidden="true">▤</span> Archive</a>
+          <a class="folder-link" href="#spam" data-folder="spam"><span class="folder-icon" aria-hidden="true">⊘</span> Spam</a>
+          <a class="folder-link" href="#trash" data-folder="trash"><span class="folder-icon" aria-hidden="true">⌫</span> Trash</a>
+        </nav>
+        <div class="sidebar-divider"></div>
+        <div class="label-heading">YOUR LABELS <button type="button" aria-label="Add label" data-action="add-label">+</button></div>
+        <div class="custom-labels"></div>
+        <div class="sidebar-promo">
+          <span class="promo-sparkle" aria-hidden="true">✦</span>
+          <strong>A little more room</strong>
+          <p>Keep your team connected in one internal mailbox.</p>
+          <a href="/register">Request teammate access <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <a class="logout-link" href="/login" data-action="logout"><span aria-hidden="true">↪</span> Sign out</a>
+      </aside>
+
+      <main class="inbox-main">
+        <section class="message-list-panel" id="inbox-list" aria-label="Messages">
+          <div class="inbox-title-row">
+            <div><p class="inbox-greeting">YOUR COMMUNITY, CONNECTED</p><h1 data-folder-title>Your inbox</h1></div>
+            <button type="button" class="more-button" aria-label="Mark visible messages as read" data-action="mark-visible-read">•••</button>
+          </div>
+          <div class="mail-tabs" role="tablist" aria-label="Inbox categories">
+            <button class="mail-tab current" type="button" role="tab" aria-selected="true" data-category="primary">Primary</button>
+            <button class="mail-tab" type="button" role="tab" aria-selected="false" data-category="social">Social <span data-category-count="social">0</span></button>
+            <button class="mail-tab" type="button" role="tab" aria-selected="false" data-category="updates">Updates</button>
+          </div>
+          <div class="list-tools">
+            <label class="select-all"><input type="checkbox" aria-label="Select all visible messages"><span></span></label>
+            <button type="button" aria-label="Refresh mailbox" data-action="refresh">↻</button>
+            <span class="list-tool-divider"></span>
+            <button type="button" aria-label="Mark selected messages as unread" data-action="mark-unread" title="Mark selected unread">◉</button>
+            <button type="button" aria-label="Archive selected messages" data-action="archive-selected" title="Archive selected">▤</button>
+            <button type="button" aria-label="Snooze selected messages" data-action="snooze-selected" title="Snooze selected">◷</button>
+            <button type="button" aria-label="Add or remove a label on selected messages" data-action="label-selected" title="Label selected">#</button>
+            <button type="button" aria-label="Move selected messages to trash" data-action="trash-selected" title="Move selected to trash">⌫</button>
+            <span class="message-pagination" data-message-count>0 messages</span>
+          </div>
+          <div class="message-list" data-message-list aria-live="polite"></div>
+        </section>
+
+        <article class="message-detail" data-message-detail aria-live="polite">
+          <div class="detail-empty">Select a message to read it.</div>
+        </article>
+      </main>
+    </div>
+    <dialog class="compose-dialog" data-compose-dialog aria-labelledby="compose-title">
+      <form class="compose-form" data-compose-form>
+        <div class="compose-header">
+          <h2 id="compose-title" data-compose-title>New message</h2>
+          <button type="button" class="compose-close" aria-label="Close compose" data-action="close-compose">×</button>
+        </div>
+        <label class="compose-field">To<input name="to" type="email" placeholder="name@beoneofus.com" pattern="^[^@\s]+@beoneofus\.com$" title="Mail is restricted to @beoneofus.com addresses." required></label>
+        <label class="compose-field">Subject<input name="subject" type="text" placeholder="Add a subject" required></label>
+        <label class="compose-field compose-body-field">Message<textarea name="body" rows="9" placeholder="Write your message..." required></textarea></label>
+        <div class="compose-tools" aria-label="Message tools">
+          <button type="button" class="compose-tool" data-action="choose-files" title="Attach files" aria-label="Attach files"><span aria-hidden="true">📎</span><span>Files</span></button>
+          <button type="button" class="compose-tool" data-action="choose-photos" title="Attach photos" aria-label="Attach photos"><span aria-hidden="true">▧</span><span>Photos</span></button>
+          <button type="button" class="compose-tool" data-action="insert-link" title="Insert a link" aria-label="Insert a link"><span aria-hidden="true">↗</span><span>Link</span></button>
+          <label class="snippet-picker"><span aria-hidden="true">☷</span><span class="visually-hidden">Insert a snippet</span>
+            <select data-snippet-select aria-label="Insert a snippet">
+              <option value="">Insert snippet…</option>
+              <option value="hello">Friendly hello</option>
+              <option value="thanks">Thank you</option>
+              <option value="follow-up">Quick follow-up</option>
+              <option value="sign-off">Warm sign-off</option>
+            </select>
+          </label>
+          <input class="visually-hidden" type="file" data-file-input multiple>
+          <input class="visually-hidden" type="file" data-photo-input accept="image/*" multiple>
+        </div>
+        <div class="compose-attachments" data-compose-attachments aria-live="polite"></div>
+        <div class="compose-footer">
+          <button class="compose-send" type="submit" data-compose-send>Send message <span aria-hidden="true">→</span></button>
+          <button class="compose-discard" type="button" data-action="discard-draft">Discard draft</button>
+          <span class="draft-status" data-draft-status aria-live="polite"></span>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="compose-dialog help-dialog" data-link-dialog aria-labelledby="link-dialog-title">
+      <form class="link-dialog-form" data-link-form>
+        <div class="compose-header">
+          <h2 id="link-dialog-title">Insert a link</h2>
+          <button type="button" class="compose-close" aria-label="Close link dialog" data-action="close-link">×</button>
+        </div>
+        <label class="compose-field">Link text<input name="text" type="text" placeholder="BeOneOfUs website" required></label>
+        <label class="compose-field">Web address<input name="url" type="url" placeholder="https://example.com" required></label>
+        <div class="compose-footer">
+          <button class="compose-send" type="submit">Insert link</button>
+          <button class="compose-discard" type="button" data-action="close-link">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="compose-dialog help-dialog" data-help-dialog aria-labelledby="help-title">
+      <div class="help-content">
+        <div class="compose-header"><h2 id="help-title">Inbox help</h2><button type="button" class="compose-close" aria-label="Close help" data-action="close-help">×</button></div>
+        <p>Your profile and mailbox are stored by the app. Attachment files remain in this browser.</p>
+        <ul><li>Search messages using the search box.</li><li>Use the sidebar to switch folders and labels.</li><li>Select messages to archive, trash, or mark unread.</li><li>Attach files or photos up to 5 MB each (15 MB total); file contents stay in this browser.</li><li>Compose and save a message in Sent. No email is delivered.</li></ul>
+        <p>Keyboard shortcuts: <kbd>/</kbd> search, <kbd>c</kbd> compose, <kbd>Escape</kbd> close a dialog.</p>
+      </div>
+    </dialog>
+    <dialog class="compose-dialog help-dialog" data-label-dialog aria-labelledby="label-dialog-title">
+      <form class="label-dialog-form" data-label-form>
+        <div class="compose-header">
+          <h2 id="label-dialog-title">Manage labels</h2>
+          <button type="button" class="compose-close" aria-label="Close labels" data-action="close-labels">×</button>
+        </div>
+        <label class="compose-field label-picker">Choose a label
+          <select name="label" data-label-select></select>
+        </label>
+        <div class="label-create-row">
+          <label for="new-label-name">Create a new label</label>
+          <div><input id="new-label-name" name="new-label" type="text" maxlength="32" placeholder="Label name"><button type="button" data-action="create-label">Create</button></div>
+        </div>
+        <div class="compose-footer">
+          <button class="compose-send" type="button" data-action="apply-label">Apply label</button>
+          <button class="compose-discard" type="button" data-action="close-labels">Done</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="compose-dialog help-dialog confirm-dialog" data-delete-dialog aria-labelledby="delete-dialog-title">
+      <div class="help-content">
+        <div class="compose-header"><h2 id="delete-dialog-title">Delete permanently?</h2><button type="button" class="compose-close" aria-label="Cancel delete" data-action="cancel-delete">×</button></div>
+        <p data-delete-description>This cannot be undone.</p>
+        <div class="compose-footer">
+          <button class="compose-send danger-button" type="button" data-action="confirm-delete">Delete permanently</button>
+          <button class="compose-discard" type="button" data-action="cancel-delete">Cancel</button>
+        </div>
+      </div>
+    </dialog>
+    <div class="inbox-toast" role="status" aria-live="polite" data-toast></div>
+    <script type="module" src="./js/inbox.js"></script>
+  </body>
+</html>

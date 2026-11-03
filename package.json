@@ -1,0 +1,36 @@
+{
+  "name": "beoneofus-mail",
+  "version": "1.0.0",
+  "description": "we can build our own email application and internal messaging infrastructure without Gmail. Initially, messages will stay inside BeOneOfUs.",
+  "homepage": "https://github.com/saviomds/BeOneOfUs-Mail#readme",
+  "bugs": {
+    "url": "https://github.com/saviomds/BeOneOfUs-Mail/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saviomds/BeOneOfUs-Mail.git"
+  },
+  "license": "ISC",
+  "author": "Dominique Savio M",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "node --test",
+    "test:e2e": "playwright test",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "admin:promote": "node scripts/promote-admin.js"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "nodemon": "^3.1.14",
+    "nodemailer": "^10.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

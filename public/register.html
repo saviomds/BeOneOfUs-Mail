@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create your BeOneOfUs Mail account.">
+    <link rel="icon" type="image/png" href="./Logo/logo.png">
+    <title>Create account - BeOneOfUs Mail</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <a class="auth-brand" href="/">
+        <img src="./Logo/Glossy B1 Mail Orbit Logo.png" alt="">
+        <span>BeOneOfUs <strong>Mail</strong></span>
+      </a>
+      <section class="auth-card" aria-labelledby="auth-title">
+        <div class="auth-heading">
+          <span class="auth-mark" aria-hidden="true"><img src="./Logo/logo.png" alt=""></span>
+          <p class="auth-eyebrow">YOUR COMMUNITY, CONNECTED</p>
+          <h1 id="auth-title">Create your account</h1>
+          <p>Request an internal account using your company email. An administrator must approve access.</p>
+        </div>
+        <form class="auth-form" data-register-form>
+          <div class="auth-field">
+            <label for="register-name">Your name</label>
+            <input id="register-name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="How should we call you?" required>
+          </div>
+          <div class="auth-field">
+            <label for="register-email">Email address</label>
+            <input id="register-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@beoneofus.com" pattern="^[^@\s]+@beoneofus\.com$" title="Use your @beoneofus.com company address." required>
+          </div>
+          <div class="auth-field">
+            <label for="register-password">Password</label>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="Create a password" required>
+            <span class="auth-hint">Use at least 8 characters. Your password is stored as a secure hash.</span>
+          </div>
+          <label class="auth-consent">
+            <input name="community-updates" type="checkbox">
+            <span>I understand access is limited to BeOneOfUs employees and requires administrator approval.</span>
+          </label>
+          <p class="profile-status" data-profile-status role="status" aria-live="polite"></p>
+          <button class="auth-submit" type="submit">Create account <span aria-hidden="true">&rarr;</span></button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="/login">Sign in</a></p>
+      </section>
+      <p class="auth-footer"><a href="/">Back to BeOneOfUs Mail</a></p>
+    </main>
+    <script type="module" src="./js/register.js"></script>
+  </body>
+</html>
