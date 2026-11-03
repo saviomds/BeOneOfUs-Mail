@@ -82,3 +82,4 @@ The **Supabase connection** panel stores an HTTPS Supabase project URL and encry
 - `PATCH /api/admin/users/:userId/status` — admin-only approve, reject, or suspend a member
 
 Run backend integration tests with `npm test`. Run Chromium browser end-to-end coverage with `npm run test:e2e`; install its browser once with `npx playwright install chromium`.
+# BeOneOfUs-Mail
