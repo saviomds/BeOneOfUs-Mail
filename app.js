@@ -56,3 +56,7 @@ export function createApp({ passwordResetMailer, smtpTestEmail, supabaseConnecti
 
   return app;
 }
+
+const app = createApp();
+
+export default app;
